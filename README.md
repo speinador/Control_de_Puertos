@@ -1,50 +1,64 @@
-@echo off
-echo Abriendo puerto 445 en el firewall...
-echo
-echo Es utilizado por SMB (Server Message Block) en Windows para compartir archivos e impresoras.
-echo
-echo Es uno de los puertos más atacados por herramientas como Metasploit, ya que ha tenido vulnerabilidades graves.
-echo
-echo Abrirlo sin necesidad y sin medidas de seguridad representa un alto riesgo.
+# 🔒 Script para Gestión de Puertos en el Firewall de Windows
 
-echo ==========================================
-echo          GESTIÓN DE PUERTOS FIREWALL
-echo ==========================================
-echo.
-echo 1. Abrir un puerto
-echo 2. Cerrar un puerto
-echo 3. Salir
-echo.
-set /p opcion=Elige una opción (1-3): 
+Este script en **Batch (.bat)** permite **abrir o cerrar cualquier puerto específico en el firewall de Windows**, especificando el número de puerto y el protocolo (TCP o UDP) de forma manual.
 
-if "%opcion%"=="1" goto ABRIR
-if "%opcion%"=="2" goto CERRAR
-if "%opcion%"=="3" exit
-goto MENU
+---
 
-:ABRIR
-cls
-echo === ABRIR PUERTO ===
-set /p puerto=Introduce el numero de puerto a abrir: 
-set /p proto=Protocolo (TCP o UDP): 
+## 🧰 ¿Qué hace este script?
 
-netsh firewall add portopening protocol=%proto% port=%puerto% name="Puerto_%puerto%_%proto%" mode=ENABLE
+Permite realizar una gestión básica del firewall desde la línea de comandos:
 
-echo.
-echo >>> Puerto %puerto%/%proto% abierto correctamente.
-pause
-goto MENU
+1. **Abrir un puerto:** define el número y el protocolo para abrir.
+2. **Cerrar un puerto:** define el número y el protocolo para cerrar.
+3. **Salir:** Sale del menú.
 
-:CERRAR
-cls
-echo === CERRAR PUERTO ===
-set /p puerto=Introduce el numero de puerto a cerrar: 
-set /p proto=Protocolo (TCP o UDP): 
+Utiliza `netsh advfirewall`, recomendado para versiones modernas de Windows.
 
-netsh firewall delete portopening protocol=%proto% port=%puerto%
+---
 
-echo.
-echo >>> Puerto %puerto%/%proto% cerrado correctamente.
-pause
-pause
-goto MENU
+## ⚙️ ¿Cómo usarlo?
+
+1. **Haz clic derecho** en el archivo `.bat` y selecciona "**Ejecutar como administrador**".
+2. Verás el siguiente menú:
+```cmd
+**GESTIÓN DE PUERTOS FIREWALL**
+- Abrir un puerto
+- Cerrar un puerto
+- Salir
+```
+
+
+### ✔️ Ejemplo: Abrir el puerto 8080 TCP
+
+- Opción: `1`
+- Puerto: `8080`
+- Protocolo: `TCP`
+
+El script ejecutará internamente:
+```cmd
+netsh advfirewall firewall add rule name="Puerto_8080_TCP" dir=in action=allow protocol=TCP localport=8080
+```
+
+## ❌ **Ejemplo: Cerrar el puerto 8080 TCP**
+- Opción: 2
+- Puerto: 8080
+- Protocolo: TCP
+
+El script ejecutará internamente:
+```cmd
+netsh advfirewall firewall delete rule name="Puerto_8080_TCP" protocol=TCP localport=8080
+```
+## 📎 **Requisitos**
+- Ejecutar como Administrador.
+- Funciona en Windows 7, 8, 10 y 11.
+- Utiliza netsh advfirewall, recomendado por Microsoft para configuraciones modernas de firewall.
+
+## ❗ **Advertencia de Seguridad**
+Abrir puertos innecesarios puede representar un riesgo de seguridad, especialmente si estás conectado a redes públicas o sin protección. Solo abre puertos que necesitas, y asegúrate de contar con medidas como antivirus, actualizaciones al día y firewalls bien configurados.
+
+## 📁 **Archivos incluidos**
+- puertos_firewall.bat: Script interactivo para gestionar puertos.
+- README.md: Este documento con instrucciones, advertencias y ejemplos.
+
+## 🛡️ **Recomendación**
+Evita abrir puertos como el 445 (SMB) a menos que sepas lo que estás haciendo. Ese puerto ha sido históricamente vulnerable y es objetivo de ataques frecuentes.
