@@ -60,5 +60,8 @@ Abrir puertos innecesarios puede representar un riesgo de seguridad, especialmen
 - puertos_firewall.bat: Script interactivo para gestionar puertos.
 - README.md: Este documento con instrucciones, advertencias y ejemplos.
 
+📥 **Descargar archivo**
+- https://github.com/speinador/Control_de_Puertos/blob/main/Control_de_Puertos.bat
+
 ## 🛡️ **Recomendación**
 Evita abrir puertos como el 445 (SMB) a menos que sepas lo que estás haciendo. Ese puerto ha sido históricamente vulnerable y es objetivo de ataques frecuentes.
