@@ -67,12 +67,17 @@ Abrir puertos innecesarios puede representar un riesgo de seguridad, especialmen
 Evita abrir puertos como el 445 (SMB) a menos que sepas lo que estás haciendo. Ese puerto ha sido históricamente vulnerable y es objetivo de ataques frecuentes.
 
 ---
+
 ## 🧑‍🏫 Autor
 
 Explicación elaborada por [Sebastian Peinador](https://www.linkedin.com/in/sebastian-j-peinador/) para propósitos didácticos y de investigación en ciberseguridad ofensiva.
+
 ---
+
 ## 📄 Licencia
 
 Este material se distribuye bajo la licencia [MIT](LICENSE).
+
 ---
+
 > Si te resulta útil, ¡no olvides darle ⭐ al repo o compartirlo!
